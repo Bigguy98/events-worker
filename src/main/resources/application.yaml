@@ -1,0 +1,56 @@
+spring:
+  config:
+    activate:
+      on-profile: default
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://${config.db.host}:${config.db.port}/solana_bootcamp
+    password: ${config.db.password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      groupId: "default-consumer"
+
+config:
+  db:
+    host: localhost
+    port: 8432
+    password: P2ssw0rd
+
+server:
+  port: 9090
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://${config.db.host}:${config.db.port}/solana_bootcamp
+    password: ${config.db.password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: "broker:9092"
+    consumer:
+      groupId: "prod-consumer"
+
+config:
+  db:
+    host: db
+    port: 5432
+    password: P2ssw0rd
